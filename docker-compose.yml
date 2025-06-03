@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  app1:
+   image: volumetest1:dev
+   build:
+    context: .
+    dockerfile: VolumeTest1/Dockerfile
+   ports:
+    - "5001:8080"
+   volumes:
+    - shared_volume:/app
+   environment:
+    - ASPNETCORE_ENVIRONMENT=Development 
+  app2:
+   image: volumetest1:dev
+   build:
+    context: .
+    dockerfile: VolumeTest1/Dockerfile
+   ports:
+    - "5002:8080"
+   volumes:
+    - shared_volume:/app
+   environment:
+    - ASPNETCORE_ENVIRONMENT=Development
+
+volumes:
+  shared_volume:
+    external: true
